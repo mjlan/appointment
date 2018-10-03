@@ -13,7 +13,6 @@ console.log(path.resolve(APP_PATH, 'index.html'))
 module.exports = {
     entry: {
         app: [
-            'webpack-hot-middleware/client',
             'babel-polyfill',
             APP_FILE
         ]
@@ -32,7 +31,7 @@ module.exports = {
         rules: [{
             test: /\.js$/,
             exclude: /^node_modules$/,
-            use: ['react-hot-loader', 'babel-loader'],
+            use: ['babel-loader'],
             include: [APP_PATH]
         }, {
             test: /\.css$/,
@@ -50,11 +49,10 @@ module.exports = {
             test: /\.(png|jpg|gif)$/,
             exclude: /^node_modules$/,
             use: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
-            //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
         }, {
             test: /\.jsx$/,
             exclude: /^node_modules$/,
-            use: ['react-hot-loader', 'jsx-loader', 'babel-loader'],
+            use: ['jsx-loader', 'babel-loader'],
             include: [APP_PATH]
         }]
     },
