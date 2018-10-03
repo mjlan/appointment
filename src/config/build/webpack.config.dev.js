@@ -74,6 +74,6 @@ module.exports = {
             template: 'index.html',
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin()
     ]
 };
