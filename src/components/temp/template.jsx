@@ -2,11 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {get, is, fromJS} from 'immutable';
 import  * as action from '../../Redux/action.jsx'
-/*=================
- template.jsx
- 所有组件的父组件
- 用来封装组件用的
- ==================*/
+
 const Main = mySetting => {
     // 默认 setting
     let setting = {
@@ -26,13 +22,6 @@ const Main = mySetting => {
         constructor(props, context) {
             super(props, context)
         }
-
-        render() {
-            // 将数据传递给子组件
-            //...this.props 是 mapStateToProps 返回过来的数据
-            return <this.props.setting.component {...this.props}  />
-        }
-
         componentDidMount() {
             // 如果组件初次加载有请求数据，在这里 派发 Action 请求数据
             // 因为这里设计的是一个 url 只对应一次请求，如果你的组件初始化涉及到请求多个接口，是不是需要考虑拆分组件
@@ -41,7 +30,6 @@ const Main = mySetting => {
                 this.props.fetchInitData2(this.props.setting.url, this.props.setting.data);
             }
         }
-
         /*
          nextProps 或 nextState 变化时回调该方法 重新渲染组件
          */
@@ -49,6 +37,11 @@ const Main = mySetting => {
             // immutable.js 深层次判断是否状态真的发生了变化
             return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
             // return true;
+        }
+        render() {
+            // 将数据传递给子组件
+            //...this.props 是 mapStateToProps 返回过来的数据
+            return <this.props.setting.component {...this.props}  />
         }
     }
     /*
